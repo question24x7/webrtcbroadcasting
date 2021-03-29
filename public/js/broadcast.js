@@ -7,7 +7,7 @@ var yourConn = new RTCPeerConnection(configuration);
 console.log(yourConn);
 var myvid = document.getElementById('myvid');
 
-navigator.mediaDevices.getUserMedia({video: {width: 1280, height: 720} , audio: {echoCancellation: true}}).then((stream) => {
+navigator.mediaDevices.getDisplayMedia({video: {width: 1280, height: 720} , audio: {echoCancellation: true}}).then((stream) => {
     myvid.srcObject = stream;
         
      // setup stream listening 
