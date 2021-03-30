@@ -4,7 +4,7 @@ var configuration = {
  }; 
    
 var yourConn = new RTCPeerConnection(configuration);
-console.log(yourConn);
+
 var myvid = document.getElementById('myvid');
 
 navigator.mediaDevices.getUserMedia({video: {width: 1280, height: 720} , audio: {echoCancellation: true}}).then((stream) => {       
@@ -13,12 +13,13 @@ navigator.mediaDevices.getUserMedia({video: {width: 1280, height: 720} , audio: 
 })
 
 yourConn.onaddstream = function (e) { 
+   console.log(e);
    myvid.srcObject = e.stream; 
 };
 
 // Setup ice handling 
 yourConn.onicecandidate = event => {
-   console.log(event);
+   
      if (event.candidate) { 
       io.emit('message', JSON.stringify(
          {
@@ -31,7 +32,7 @@ yourConn.onicecandidate = event => {
 
 io.on("message", function(mydata){
    var mdata = JSON.parse(mydata);
-   console.log(mdata);
+   
    switch (mdata.type) {
       case 'offer':
          onOffer(mdata.data);
