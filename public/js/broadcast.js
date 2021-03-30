@@ -49,12 +49,9 @@ io.on("message", function(mydata){
 function onOffer(offer) { 
    yourConn.setRemoteDescription(new RTCSessionDescription(offer)); 
 	
-   yourConn.createAnswer({
-      offerToReceiveAudio: true,
-      offerToReceiveVideo: true
-    }).then((answer) =>{ 
+   yourConn.createAnswer().then((answer) =>{ 
       yourConn.setLocalDescription(answer); 
-		console.log(answer);
+		
       io.emit('message', JSON.stringify(
       {
          type: 'answer', 
