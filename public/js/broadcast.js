@@ -7,12 +7,14 @@ var yourConn = new RTCPeerConnection(configuration);
 console.log(yourConn);
 var myvid = document.getElementById('myvid');
 
-navigator.mediaDevices.getDisplayMedia({video: {width: 1280, height: 720} , audio: {echoCancellation: true}}).then((stream) => {
-    myvid.srcObject = stream;
-        
+navigator.mediaDevices.getUserMedia({video: {width: 1280, height: 720} , audio: {echoCancellation: true}}).then((stream) => {       
      // setup stream listening 
      yourConn.addStream(stream); 
 })
+
+yourConn.onaddstream = function (e) { 
+   myvid.srcObject = e.stream; 
+};
 
 // Setup ice handling 
 yourConn.onicecandidate = event => {

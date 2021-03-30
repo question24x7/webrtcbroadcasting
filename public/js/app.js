@@ -7,7 +7,7 @@ var yourConn = new RTCPeerConnection(configuration);
 
 var myvid = document.getElementById('myvid');
 
-navigator.mediaDevices.getUserMedia({video: false , audio: true}).then((stream) => {  
+navigator.mediaDevices.getUserMedia({video: {width: 1280, height: 720} , audio: {echoCancellation: true}}).then((stream) => {  
     // setup stream listening 
     yourConn.addStream(stream); 
 }) 
